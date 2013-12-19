@@ -33,7 +33,7 @@ require.config({
 			baseUrl: '../'
 		},
 		'app/firebase/host': {
-			url: 'chat.firebaseio.com'
+			url: 'blazing-chat.firebaseio.com'
 		}
 	},
 	deps: [
@@ -54,11 +54,11 @@ require([
 // Start the main app logic.
 require([
 	'bootstrap',
-	'app/index'
+	'app/user',
+	'app/chat',
+	'app/auth-notification'
 ], function () {
 	'use strict';
 
 	console.log('App loaded');
-
-	require(['app/user']);
 });

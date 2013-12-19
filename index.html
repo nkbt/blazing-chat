@@ -2,13 +2,13 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>Fire-chat</title>
+	<title>Blazing chat</title>
 </head>
 
 
 <body>
 
-<div class="navbar navbar-fixed-top navbar-inverse jsAppUser jsAppNavigation">
+<div class="navbar navbar-fixed-top navbar-inverse jsAppUser">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -16,26 +16,16 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<span class="navbar-brand">Fire-chat</span>
+			<a href="/" class="navbar-brand">Blazing chat</a>
 		</div>
 		<div class="collapse navbar-collapse jsAppUser-container"></div>
 	</div>
 </div>
 
 
-<div class="container content" style="min-height: 600px;">
-	<div id="loading"
-			style="font-family: Consolas, 'Liberation Mono', Courier, monospace; position: fixed; display: inline-block; width: 200px; margin: -1em 0 0 -100px; padding: 0; text-align: center; left: 50%; top: 50%; font-size: 20px; line-height: 2em; background: #fff; border-radius: 5px;"></div>
+<div class="container content jsAppChat" style="min-height: 300px;">
+	<div id="loading" style="font-family: Consolas, 'Liberation Mono', Courier, monospace; position: fixed; display: inline-block; width: 200px; margin: -1em 0 0 -100px; padding: 0; text-align: center; left: 50%; top: 50%; font-size: 20px; line-height: 2em; background: #fff; border-radius: 5px;"></div>
 </div>
-
-
-<div class="container">
-	<hr>
-	<footer>
-		<p>&copy; Nik Butenko 2013</p>
-	</footer>
-</div>
-
 
 <script type="text/javascript">
 
@@ -65,49 +55,30 @@
 </script>
 
 
-<script type="text/html" id="template/messenger">
-	<div class="lib_messenger" style="position: fixed; top: 50px; right: 0; padding: 1em; width: 30%;"></div>
+<script type="text/html" id="template-lib-messenger">
+	<div class="jsLibMessenger" style="position: fixed; top: 50px; right: 0; padding: 1em; width: 30%;"></div>
 </script>
 
-<script type="text/html" id="template/messenger/error">
-	<div class="lib_messenger-message alert alert-danger"
-			data-lib_messenger-autohide="30000"
+<script type="text/html" id="template-lib-messenger-error">
+	<div class="jsLibMessenger-message alert alert-danger"
+			data-lib-messenger-autohide="30000"
 			style="position: relative; padding-right: 2em; cursor: pointer;">
-		<i class="icon-remove icon-large"
-				style="position: absolute; right: 0.5em; top: 0.5em; opacity: 0.5"></i>
-		<div class="lib_messenger-text">
-			Oh snap! Change a few things up and try submitting again.
-		</div>
+		<i class="fa fa-times" style="position: absolute; right: 0.5em; top: 0.5em; opacity: 0.5"></i>
+		<%- text %>
 	</div>
 </script>
 
-<script type="text/html" id="template/messenger/message">
-	<div class="lib_messenger-message alert alert-success"
-			data-lib_messenger-autohide="2000"
+<script type="text/html" id="template-lib-messenger-message">
+	<div class="jsLibMessenger-message alert alert-success"
+			data-lib-messenger-autohide="2000"
 			style="position: relative; padding-right: 2em; cursor: pointer;">
-		<i class="icon-remove icon-large"
-				style="position: absolute; right: 0.5em; top: 0.5em; opacity: 0.5"></i>
-		<div class="lib_messenger-text">
-			Well done! You successfully read this important alert message.
-		</div>
+		<i class="fa fa-times" style="position: absolute; right: 0.5em; top: 0.5em; opacity: 0.5"></i>
+		<%- text %>
 	</div>
 </script>
 
 
-<script type="text/html" id="view/index">
-	<div class="app_controllers_index-index">
-
-		<div class="page-header">
-			<h1>Overview
-				<small>Click on map to add a note</small>
-			</h1>
-		</div>
-
-	</div>
-</script>
-
-
-<script type="text/html" id="template/app/user/guest">
+<script type="text/html" id="template-app-user-guest">
 	<ul class="nav navbar-nav">
 		<li class="dropdown ">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
@@ -115,16 +86,19 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li>
-					<a href="javascript:void(0)" class="jsAppAuth-login" data-appAuth="twitter"><i class="fa fa-twitter"></i> Twitter</a>
+					<a href="javascript:void(0)" class="jsAppAuth-login" data-app-auth="twitter"><i class="fa fa-fw fa-twitter"></i> Twitter</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="jsAppAuth-login" data-appAuth="facebook"><i class="fa fa-facebook"></i> Facebook</a>
+					<a href="javascript:void(0)" class="jsAppAuth-login" data-app-auth="facebook"><i class="fa fa-fw fa-facebook"></i> Facebook</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" class="jsAppAuth-login" data-app-auth="github"><i class="fa fa-fw fa-github"></i> Github</a>
 				</li>
 			</ul>
 		</li>
 	</ul>
 </script>
-<script type="text/html" id="template/app/user/user">
+<script type="text/html" id="template-app-user-user">
 	<ul class="nav navbar-nav">
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
@@ -140,6 +114,27 @@
 		</li>
 	</ul>
 </script>
+
+<script type="text/html" id="template-app-chat">
+	<div class="jsAppChat-container">
+		<div class="jsAppChat-formContainer"></div>
+		<div class="jsAppChat-messages"></div>
+	</div>
+</script>
+
+<script type="text/html" id="template-app-chat-message">
+	<div class="jsAppChat-message">
+		<%- user.name %>. <%- message.time %>: <%- message.text %>
+	</div>
+</script>
+
+<script type="text/html" id="template-app-chat-form">
+	<form class="jsAppChat-form">
+		<input type="text" name="text"/>
+		<input type="submit"/>
+	</form>
+</script>
+
 
 </body>
 </html>

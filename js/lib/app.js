@@ -1,20 +1,20 @@
 define('lib/app', ['module', 'dom', 'underscore'], function (module, $, _) {
 	"use strict";
-	
+
 	var $element = $(document.body),
 		templates = {};
 
 	function template(name, data) {
-		var element;
-		if (!templates[name]) {
-			element = document.querySelector(['#', name.replace(/\//g, '\\\\/')].join(''));
-			console.log("element", element);
+		var normalizedName = name.replace(/[^a-z]+/gi, '-'),
+			element;
+		if (!templates[normalizedName]) {
+			element = document.querySelector(['#', normalizedName].join(''));
 			if (!element) {
-				throw new Error('Template not found');
+				throw new Error(['Template', name, 'not found'].join(' '));
 			}
-			templates[name] = _.template(element.innerHtml);
+			templates[normalizedName] = _.template(element.innerHTML);
 		}
-		return templates[name](data);
+		return templates[normalizedName](data);
 	}
 
 
